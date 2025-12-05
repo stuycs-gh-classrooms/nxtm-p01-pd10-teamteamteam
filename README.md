@@ -9,6 +9,21 @@ Your mission is create either:
 - Life-like cellular automata [life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), [life-like](https://en.wikipedia.org/wiki/Life-like_cellular_automaton), [demo](https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/Sample%20Models/Computer%20Science/Cellular%20Automata/Life.nlogo).
 - Breakout/Arkanoid [demo 0](https://elgoog.im/breakout/)  [demo 1](https://www.crazygames.com/game/atari-breakout)
 - Space Invaders/Galaga
+  //
+- A classic game that we have made pieces of in class. This style game should have:
+
+    A grid of "enemies" that move across and down, and also shoot the player.
+    A user controlled "spaceship" for shooting projectiles.
+    Projectiles that collide and destroy enemies.
+
+In addition to basic gameplay, if you choose space invaders your program must have the following:
+
+    A set number (more than one) of "lives".
+    The ability to play/pause the game.
+    The ability to reset the game.
+    Some continuation of the game if all the enemies have been destroyed.
+    Different kinds of enemies (possible differences are movement, health, speed, etc)
+//
 
 This project will be completed in phases.  
 The first phase will be to work on this document. 
@@ -22,15 +37,16 @@ The first phase will be to work on this document.
 
 ## Phase 0: Selection, Analysis & Plan
 
-#### Selected Project: CHOOSE WISELY
+#### Selected Project: Space Invaders/Galaga
 
 ### Necessary Features
 What are the core features that your program should have? These should be things that __must__ be implemented in order to make the program useable/playable, not extra features that could be added to make the program more interesting/fun.
 
-YOUR ANSWERS HERE
+- A grid (w/ and established size) that represents the enemy aliens
+- if hit, these aliens (or circles or squares or whatever they may visually be)
 
 ### Extra Features
-What are some features that are not essential to the program, but you would like to see (provided you have time after completing the necessary features. Theses can be customizations that are not part of the core requirements.
+- cosmetics (ex. colored aliens, with color changing w/ each row)
 
 YOUR ANSWERS HERE
 
