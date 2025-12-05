@@ -42,33 +42,67 @@ The first phase will be to work on this document.
 ### Necessary Features
 What are the core features that your program should have? These should be things that __must__ be implemented in order to make the program useable/playable, not extra features that could be added to make the program more interesting/fun.
 
+alien:
 - A grid (w/ and established size) that represents the enemy aliens
-- if hit, these aliens (or circles or squares or whatever they may visually be)
+- if hit w/ projectiles, these aliens (or circles or squares or whatever they may visually be) will dissapear from the grid
+- these aliens also shoot thier own projectiles
+- variation among the enemies (ex. movement, speed, health or smthn)
+
+player:
+- @ a button press (space?), "player" shoots projectile.
+- 
+ui/ game stuffs:
+- play/pause button (p)
+- reset button (r)
+- if you run out of enemies do you just reset?
 
 ### Extra Features
 - cosmetics (ex. colored aliens, with color changing w/ each row)
+- "sheild" which can take more than 1 hit before being completely destroyed?
+- points/high score
+- timer?
 
-YOUR ANSWERS HERE
 
 ### Array Usage
 How will you be using arrays in this project?
 
 1D Array:
-- YOUR ANSER HERE
+- "player"
+- projectile?
 
 2D Array:
-- YOUR ANSWER HERE
+- grid (aliens)
 
 
 ### Controls
 How will your program be controlled? List all keyboard commands and mouse interactions.
 
 Keyboard Commands:
-- LIST OF COMMANDS HERE
+//UI & ??projectile??
+- void keyPressed (){
+  if (key == 'r'){
+  //something that reverts game to OG setup
+  }
+  if (key == 'p'){
+  //an established boolean of "playing" would be set to true/false.
+  //or should playing and pause be seperate buttons?
+  }
+  if (key == ' '){
+  //fire projectile that has the same x cor as player when this button is pressed.
+  //then just goes up until it hits an alien
+  }
+  
+  }
+
+//player
+- something for movement (LEFT/RIGHT)
+- --> maybe set the direction as a conditon and, if true, player location x cor moves +-1
+- 
+  
 
 Mouse Control:
-- Mouse movement:
-- Mouse pressed:
+- Mouse movement:N/A
+- Mouse pressed:N/A
 
 
 ### Classes
