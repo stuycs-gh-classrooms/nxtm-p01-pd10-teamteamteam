@@ -47,6 +47,7 @@ alien:
 - if hit w/ projectiles, these aliens (or circles or squares or whatever they may visually be) will dissapear from the grid
 - these aliens also shoot thier own projectiles
 - variation among the enemies (ex. movement, speed, health or smthn)
+  ---->  ex. if row (first num of array like [a][b]) if = to a certain number, a certain type of alien will be called_
 
 player:
 - @ a button press (space?), "player" shoots projectile.
@@ -125,6 +126,7 @@ collision (if player is hit by alien projectile a certain nuber of times, game e
 
 
 alien
+//shpuld a new class be made for each type of alien (ex more health, different speed)?
 - Instance variables:
 PVector center
 int xspeed
