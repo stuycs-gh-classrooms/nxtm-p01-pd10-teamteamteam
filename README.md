@@ -61,14 +61,14 @@ ui/ game stuffs:
 - "sheild" which can take more than 1 hit before being completely destroyed?
 - points/high score
 - timer?
+- multiple lives (and a way to toggle it like some easy/hard mode)
 
 
 ### Array Usage
 How will you be using arrays in this project?
 
 1D Array:
-- "player"
-- projectile?
+- player?
 
 2D Array:
 - grid (aliens)
@@ -108,14 +108,30 @@ Mouse Control:
 ### Classes
 What classes will you be creating for this project? Include the instance variables and methods that you believe you will need. You will be required to create at least 2 different classes. If you are going to use classes similar to those we've made for previous assignments, you will have to add new features to them.
 
-CLASS NAME0
+//likely similar to ball class in w32_balllGrid
+//seperate player and alien entities since they have their respectives projectiles?
+player
 - Instance variables:
-  - LIST INSTANCE VARS HERE
-- METHODS
-  - LIST METHODS HERE
+PVector center
+int xspeed
+int yspeed
+int pSize
 
-CLASS NAME1
-- Instance variables:
-  - LIST INSTANCE VARS HERE
 - METHODS
-  - LIST METHODS HERE
+display
+move (lets you move player x cor +-)
+collision (if player is hit by alien projectile, game ends (assuming only 1 life)).
+
+
+alien
+- Instance variables:
+PVector center
+int xspeed
+int yspeed
+int aSize
+// boolean edge
+--> changes direction and moves down a little if this is true. checked by comparing distance of grid and screen edge
+- METHODS
+display
+collison (if alien at a certain array index gets hit (collision = true) it dissapears)
+  
