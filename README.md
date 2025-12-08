@@ -51,7 +51,9 @@ alien:
 
 player:
 - @ a button press (space?), "player" shoots projectile.
-- 
+- Can be moved LEFT/RIGHT
+
+  
 ui/ game stuffs:
 - play/pause button (p)
 - reset button (r)
