@@ -61,7 +61,7 @@ ui/ game stuffs:
 - "sheild" which can take more than 1 hit before being completely destroyed?
 - points/high score
 - timer?
-- multiple lives (and a way to toggle it like some easy/hard mode)
+
 
 
 ### Array Usage
@@ -120,7 +120,8 @@ int pSize
 - METHODS
 display
 move (lets you move player x cor +-)
-collision (if player is hit by alien projectile, game ends (assuming only 1 life)).
+collision (if player is hit by alien projectile a certain nuber of times, game ends ).
+--> ex. have an int for lives that decreases by 1 if collison == true. when that int == 0 game ends.
 
 
 alien
