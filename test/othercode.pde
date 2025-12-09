@@ -1,23 +1,25 @@
 alien[][] grid;
-alien player;
-int cSize = 50;
+player[] test;
+player play;
+//alien player;
+int bSize = 50;
 
 void setup () {
   size (600, 600);
   frameRate(30);
   grid = new alien[3][5];
+  test = new player[1];
   makeAliens(grid);
-
-  newPlayer(cSize);
+  makePlayer(test);
 }
 
 void draw() {
 
   background (255);
   drawGrid(grid);
+  drawPlayer(test);
 
-  //processCollisions(projectile, grid);
-  player.Pdisplay();
+  //processCollisions(test, grid);
 }
 
 void makeAliens(alien[][] g) {
@@ -26,13 +28,13 @@ void makeAliens(alien[][] g) {
 
   for (int r = 0; r <= grid.length - 1; r++) {
     for (int c = 0; c <= grid[r].length - 1; c++) {
-      int centerX = width/3 + ((cSize)*(c));
-      //grid.length/cSize;
-      int centerY = height/10 + ((cSize)*(r));
-      //grid[r].length/cSize;
+      int centerX = width/3 + ((bSize)*(c));
+      //grid.length/bSize;
+      int centerY = height/10 + ((bSize)*(r));
+      //grid[r].length/bSize;
       PVector center = new PVector (centerX, centerY);
 
-      g[r][c] = new alien(center, cSize);
+      g[r][c] = new alien(center, bSize);
     }
   }
 }
@@ -50,16 +52,42 @@ void drawGrid(alien[][] g) {
   }
 }
 
-void newPlayer(int psize) {
-  for (int r = 0; r <= grid.length - 1; r++) {
-    for (int c = 0; c <= grid[r].length - 1; c++) {
-      int projX = width/2;
-      //grid.length/2;
-      int projY =  height/2;
-      //grid[r].length;
-      PVector projCenter = new PVector (projX, projY);
-      fill(255, 0, 0);
-      player = new alien (projCenter, psize);
+void makePlayer(player[] p) {
+
+  int centerX = width/2;
+  //grid.length/bSize;
+  int centerY = height/2;
+  //grid[r].length/bSize;
+  PVector center = new PVector (centerX, centerY);
+
+  p[0] = new player(center, bSize);
+}
+
+void drawPlayer (player[] p) {
+  if (p[0] != null) {
+
+    (p[0]).Pdisplay();
+  }
+}
+
+
+
+void keyPressed() {
+  //nullPointer :(((
+  if (keyPressed == true ) {
+    if (key == ' ') {
+      play.Pmove();
+      play.yspeed = -1;
+    }
+    if (key == CODED) {
+      if (keyCode == LEFT)
+      {
+        play.center.x--;
+      }
+      if (keyCode == RIGHT) {
+        play.center.x++;
+      }
+      
     }
   }
 }

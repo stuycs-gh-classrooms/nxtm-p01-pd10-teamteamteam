@@ -1,5 +1,4 @@
-//basically copypaste rn
-class alien
+class player
 {
 
       //instance variables
@@ -10,14 +9,14 @@ class alien
     color c;
 
     //default constructor
-    alien(PVector p, int s) 
+    player(PVector p, int s) 
     {
   bsize = s;
   center = new PVector(p.x, p.y);
     }
 
 
-    boolean collisionCheck(alien other) 
+    boolean collisionCheck(player other) 
     {
   return ( this.center.dist(other.center)
      <= (this.bsize/2 + other.bsize/2) );
@@ -26,20 +25,15 @@ class alien
 
 
     //visual behavior
-    void display() 
+    void Pdisplay() 
     {
-  fill(#DD571C);
-  circle(center.x, center.y, bsize);
-    }//display
-    /*
-    void Pdisplay(){
   fill(#1E2A56);
   triangle(center.x, center.y + height/10, center.x - bsize, center.y+(center.y * 0.35), center.x + bsize,center.y+(center.y * 0.35) );
     }
-*/
-// makes no sense to have the player in the alien class. just make a new player class and then account for its projectiles lol
+    //display
+    
     //movement behavior
-    void move() 
+    void Pmove() 
     {
   if (center.x > width - bsize/2 ||
       center.x < bsize/2) {
@@ -53,4 +47,5 @@ class alien
   center.y+= yspeed;
     }//move
 
-}//Ball
+}
+//Ball
