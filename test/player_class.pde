@@ -35,12 +35,12 @@ class player
     //movement behavior
     void Pmove() 
     {
-  if (center.x > width - bsize/2 ||
-      center.x < bsize/2) {
+  if (center.x > 0 &&
+      center.x < width) {
       xspeed*= -1;
   }
-  if (center.y > height - bsize/2 ||
-      center.y < bsize/2) {
+  if (center.y > 0 &&
+      center.y < height) {
       yspeed*= -1;
   }
   center.x+= xspeed;

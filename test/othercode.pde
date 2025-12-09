@@ -1,7 +1,7 @@
 alien[][] grid;
 player[] test;
 player play;
-//alien player;
+
 int bSize = 50;
 
 void setup () {
