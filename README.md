@@ -47,10 +47,13 @@ alien:
 - if hit w/ projectiles, these aliens (or circles or squares or whatever they may visually be) will dissapear from the grid
 - these aliens also shoot thier own projectiles
 - variation among the enemies (ex. movement, speed, health or smthn)
+  ---->  ex. if row (first num of array like [a][b]) if = to a certain number, a certain type of alien will be called_
 
 player:
 - @ a button press (space?), "player" shoots projectile.
-- 
+- Can be moved LEFT/RIGHT
+
+  
 ui/ game stuffs:
 - play/pause button (p)
 - reset button (r)
@@ -63,12 +66,12 @@ ui/ game stuffs:
 - timer?
 
 
+
 ### Array Usage
 How will you be using arrays in this project?
 
 1D Array:
-- "player"
-- projectile?
+- player?
 
 2D Array:
 - grid (aliens)
@@ -108,14 +111,32 @@ Mouse Control:
 ### Classes
 What classes will you be creating for this project? Include the instance variables and methods that you believe you will need. You will be required to create at least 2 different classes. If you are going to use classes similar to those we've made for previous assignments, you will have to add new features to them.
 
-CLASS NAME0
+//likely similar to ball class in w32_balllGrid
+//seperate player and alien entities since they have their respectives projectiles?
+player
 - Instance variables:
-  - LIST INSTANCE VARS HERE
-- METHODS
-  - LIST METHODS HERE
+PVector center
+int xspeed
+int yspeed
+int pSize
 
-CLASS NAME1
-- Instance variables:
-  - LIST INSTANCE VARS HERE
 - METHODS
-  - LIST METHODS HERE
+display
+move (lets you move player x cor +-)
+collision (if player is hit by alien projectile a certain nuber of times, game ends ).
+--> ex. have an int for lives that decreases by 1 if collison == true. when that int == 0 game ends.
+
+
+alien
+//shpuld a new class be made for each type of alien (ex more health, different speed)?
+- Instance variables:
+PVector center
+int xspeed
+int yspeed
+int aSize
+// boolean edge
+--> changes direction and moves down a little if this is true. checked by comparing distance of grid and screen edge
+- METHODS
+display
+collison (if alien at a certain array index gets hit (collision = true) it dissapears)
+  
