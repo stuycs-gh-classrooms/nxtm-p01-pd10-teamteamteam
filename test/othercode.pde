@@ -159,6 +159,7 @@ void impact (player p, alien[][] g) {
         fire = false;
         //this doesnt really completely remove the ball, so ig it still processes it getting hit?
         g[r][c].bsize = 0;
+        g[r][c].center.y = 0;
         newProjectile(bSize);
       }
     }
