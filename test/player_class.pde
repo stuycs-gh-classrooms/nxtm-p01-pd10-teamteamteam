@@ -2,7 +2,7 @@ class player
 {
 
       //instance variables
-    PVector center;
+    PVector Pcenter;
     int xspeed;
     int yspeed;
     int bsize;
@@ -12,13 +12,13 @@ class player
     player(PVector p, int s) 
     {
   bsize = s;
-  center = new PVector(p.x, p.y);
+  Pcenter = new PVector(p.x, p.y);
     }
 
 
     boolean collisionCheck(player other) 
     {
-  return ( this.center.dist(other.center)
+  return ( this.Pcenter.dist(other.Pcenter)
      <= (this.bsize/2 + other.bsize/2) );
     }//collisionCheck
 
@@ -28,24 +28,36 @@ class player
     void Pdisplay() 
     {
   fill(#1E2A56);
-  triangle(center.x, center.y + height/10, center.x - bsize, center.y+(center.y * 0.35), center.x + bsize,center.y+(center.y * 0.35) );
+  circle(Pcenter.x, Pcenter.y, bsize);
     }
     //display
     
     //movement behavior
     void Pmove() 
     {
-  if (center.x > 0 &&
-      center.x < width) {
+ if (Pcenter.x > width - bsize/2 ||
+      Pcenter.x < bsize/2) {
       xspeed*= -1;
   }
-  if (center.y > 0 &&
-      center.y < height) {
+  if (Pcenter.y > height - bsize/2 ||
+      Pcenter.y < bsize/2) {
       yspeed*= -1;
   }
-  center.x+= xspeed;
-  center.y+= yspeed;
+  Pcenter.x+= xspeed;
+  Pcenter.y+= yspeed;
     }//move
-
+void Xmove() 
+    {
+ if (Pcenter.x > width - bsize/2 ||
+      Pcenter.x < bsize/2) {
+      xspeed*= -1;
+  }
+  if (Pcenter.y > height - bsize/2 ||
+      Pcenter.y < bsize/2) {
+      yspeed*= -1;
+  }
+  Pcenter.x+= xspeed;
+  Pcenter.y-= 3;
+    }
 }
 //Ball

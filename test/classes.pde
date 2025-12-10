@@ -31,25 +31,20 @@ class alien
   fill(#DD571C);
   circle(center.x, center.y, bsize);
     }//display
-    /*
-    void Pdisplay(){
-  fill(#1E2A56);
-  triangle(center.x, center.y + height/10, center.x - bsize, center.y+(center.y * 0.35), center.x + bsize,center.y+(center.y * 0.35) );
-    }
-*/
-// makes no sense to have the player in the alien class. just make a new player class and then account for its projectiles lol
+    
     //movement behavior
     void move() 
     {
   if (center.x > width - bsize/2 ||
       center.x < bsize/2) {
+      
       xspeed*= -1;
   }
   if (center.y > height - bsize/2 ||
       center.y < bsize/2) {
       yspeed*= -1;
   }
-  center.x+= xspeed;
+  center.x+= 0.9;
   center.y+= yspeed;
     }//move
 
