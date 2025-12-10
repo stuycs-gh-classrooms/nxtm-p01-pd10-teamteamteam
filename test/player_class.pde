@@ -57,7 +57,7 @@ class player
       yspeed*= -1;
     }
     Pcenter.x+= xspeed;
-    Pcenter.y-= 3;
+    Pcenter.y -= 13;
   }
 }
 //Ball

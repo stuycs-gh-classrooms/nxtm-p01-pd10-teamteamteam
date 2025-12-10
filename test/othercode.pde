@@ -32,14 +32,13 @@ void setup () {
 void draw() {
 
   background (#1b1b1b);
+  impact(pProjectile, grid);
   drawGrid(grid);
   drawPlayer(test);
   play.Pdisplay();
   pProjectile.Pdisplay();
   println(frameCount);
   if (alienRite == true) {
-    //this doesnt mean anything ??
-    // if (grid.length < width - bSize ) {
     for (int r = 0; r <= grid.length - 1; r++) {
       for (int c = 0; c <= grid[r].length - 1; c++) {
 
@@ -112,7 +111,7 @@ void drawPlayer (player[] p) {
 void newPlayer(int bsize) {
 
   int projX = width/2;
-  int projY =  height/2;
+  int projY =  height - height/10;
   PVector PCenter = new PVector (projX, projY);
   fill(255, 0, 0);
   play = new player (PCenter, bsize);
@@ -125,34 +124,42 @@ void newProjectile(int psize) {
   //grid[r].length;
   PVector projCenter = new PVector (projX, projY);
   fill(255, 0, 0);
+  noStroke();
   pProjectile = new player (projCenter, psize/2);
 }
-
-
-
-
 
 
 void keyPressed() {
   //nullPointer :(((
   if (keyPressed == true ) {
     if (key == ' ') {
-      //make it continuously move
-      //rn only moves when space bar is held
-      //pProjectile.Pcenter.y--;
-      //play.yspeed = -1;
       fire = true;
       //play.Pmove();
     }
     if (key == CODED) {
       if (keyCode == LEFT)
       {
-        play.Pcenter.x--;
-        pProjectile.Pcenter.x--;
+        play.Pcenter.x-=3;
+        pProjectile.Pcenter.x-=3;
       }
       if (keyCode == RIGHT) {
-        play.Pcenter.x++;
-        pProjectile.Pcenter.x++;
+        play.Pcenter.x+=3;
+        pProjectile.Pcenter.x+=3;
+      }
+    }
+  }
+}
+
+void impact (player p, alien[][] g) {
+  for (int r = 0; r <= grid.length - 1; r++) {
+    for (int c = 0; c <= grid[r].length - 1; c++) {
+      //gives same result as dist.. point doesnt wanna go beyond the closest row...
+      if ((abs((grid[r][c].center.y - p.Pcenter.y)) < bSize/2) &&
+        (abs((grid[r][c].center.x - p.Pcenter.x)) < bSize/2)) {
+        fire = false;
+        //this doesnt really completely remove the ball, so ig it still processes it getting hit?
+        g[r][c].bsize = 0;
+        newProjectile(bSize);
       }
     }
   }
