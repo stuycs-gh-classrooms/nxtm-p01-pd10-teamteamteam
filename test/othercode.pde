@@ -1,45 +1,75 @@
 alien[][] grid;
 player[] test;
+//actual player
 player play;
+//player projectile
 player pProjectile;
+//alien projectile
+alien aProjectile;
+
+
 //checks if the grid is moving right. if it is it continues until it hits the border, then it will move down and change to false (going left)
 boolean alienRite;
+//if 'fire' == true, the play projectile is launched. 'fire' is set to true when '' is pressed
 boolean fire = false;
+//size of circle
 int bSize = 50;
 
 void setup () {
   size (600, 600);
   frameRate(30);
+  //establishes alien grid, which in this case is 3x5
   grid = new alien[3][5];
+  //player
   test = new player[1];
   makeAliens(grid);
+  //automatically set to true since the grid first moves rightward
   alienRite = true;
-  //line below not needed
-  //makePlayer(test);
   newPlayer(bSize);
   newProjectile(bSize);
 }
 
 void draw() {
 
-  background (255);
+  background (#1b1b1b);
   drawGrid(grid);
   drawPlayer(test);
   play.Pdisplay();
   pProjectile.Pdisplay();
   println(frameCount);
-  if (alienRite) {
-    if (grid.length < width - bSize ) {
-      
-      for (int r = 0; r <= grid.length - 1; r++) {
-        for (int c = 0; c <= grid[r].length - 1; c++) {
+  if (alienRite == true) {
+    //this doesnt mean anything ??
+    // if (grid.length < width - bSize ) {
+    for (int r = 0; r <= grid.length - 1; r++) {
+      for (int c = 0; c <= grid[r].length - 1; c++) {
 
-          grid[r][c].move();
+        grid[r][c].move();
+
+        //grid bounces back @ right edge
+        if (width - grid[r][c].center.x <= bSize/2) {
+          //only moves one alien down?
+          //grid[r][c].center.y += bSize;
+          alienRite = false;
         }
       }
     }
   }
-  if (fire == true){
+  if (alienRite == false) {
+    for (int r = 0; r <= grid.length - 1; r++) {
+      for (int c = 0; c <= grid[r].length - 1; c++) {
+
+        grid[r][c].move();
+
+        //grid bounces back @ left edge
+        if (grid[r][c].center.x <= bSize/2) {
+          alienRite = true;
+        }
+      }
+    }
+  }
+
+  //fires player projectile
+  if (fire == true) {
     pProjectile.Xmove();
   }
 }
@@ -48,7 +78,6 @@ void makeAliens(alien[][] g) {
 
   for (int r = 0; r <= grid.length - 1; r++) {
     for (int c = 0; c <= grid[r].length - 1; c++) {
-      //probably change this to originate from the upper lefthand corner
       int centerX = width/3 + ((bSize)*(c));
       int centerY = height/10 + ((bSize)*(r));
       PVector center = new PVector (centerX, centerY);
