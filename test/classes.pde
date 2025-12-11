@@ -1,4 +1,4 @@
-//basically copypaste rn
+
 class alien
 {
 
@@ -51,4 +51,22 @@ class alien
     }
     center.y+= yspeed;
   }//move
+  void Amove()
+  {
+    if (center.x > width - bsize/2 ||
+      center.x < bsize/2) {
+
+      xspeed*= -1;
+    }
+    if (center.y > height - bsize/2 ||
+      center.y < bsize/2) {
+      yspeed*= -1;
+    }
+    if (alienRite == true) {
+      center.x+=1;
+    } else if (alienRite != true) {
+      center.x-=1;
+    }
+    center.y+= 8;
+  }
 }//Ball

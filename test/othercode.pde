@@ -12,21 +12,27 @@ alien aProjectile;
 boolean alienRite;
 //if 'fire' == true, the play projectile is launched. 'fire' is set to true when '' is pressed
 boolean fire = false;
+boolean startGame = false;
 //size of circle
 int bSize = 50;
+int gridRows = 3;
+int gridCols = 5;
+int sec = second();
 
 void setup () {
   size (600, 600);
   frameRate(30);
   //establishes alien grid, which in this case is 3x5
-  grid = new alien[3][5];
+
+  grid = new alien[gridRows][gridCols];
   //player
   test = new player[1];
   makeAliens(grid);
   //automatically set to true since the grid first moves rightward
   alienRite = true;
   newPlayer(bSize);
-  newProjectile(bSize);
+  newpProjectile(bSize);
+  enemyProj(grid);
 }
 
 void draw() {
@@ -37,32 +43,42 @@ void draw() {
   drawPlayer(test);
   play.Pdisplay();
   pProjectile.Pdisplay();
+  //aProjectile.display();
   println(frameCount);
   if (alienRite == true) {
+    boolean poo = false;
     for (int r = 0; r <= grid.length - 1; r++) {
       for (int c = 0; c <= grid[r].length - 1; c++) {
-
-        grid[r][c].move();
-
+        if (poo ==  true) {
+          // grid[r-1][c].center.y += 2*bSize;
+        }
         //grid bounces back @ right edge
         if (width - grid[r][c].center.x <= bSize/2) {
-          //only moves one alien down?
+          //doesnt move first row down?
           //grid[r][c].center.y += bSize;
           alienRite = false;
+          poo = true;
         }
+
+        grid[r][c].move();
       }
     }
   }
   if (alienRite == false) {
+    boolean poo = false;
     for (int r = 0; r <= grid.length - 1; r++) {
       for (int c = 0; c <= grid[r].length - 1; c++) {
-
-        grid[r][c].move();
+        if (poo ==  true) {
+          // grid[r][c].center.y += 3*bSize;
+        }
 
         //grid bounces back @ left edge
         if (grid[r][c].center.x <= bSize/2) {
+          //grid[r][c].center.y += bSize;
           alienRite = true;
+          poo = true;
         }
+        grid[r][c].move();
       }
     }
   }
@@ -70,6 +86,10 @@ void draw() {
   //fires player projectile
   if (fire == true) {
     pProjectile.Xmove();
+  }
+  if (startGame == true) {
+    aProjectile.Amove();
+    aProjectile.display();
   }
 }
 
@@ -81,7 +101,6 @@ void makeAliens(alien[][] g) {
       int centerY = height/10 + ((bSize)*(r));
       PVector center = new PVector (centerX, centerY);
       g[r][c] = new alien(center, bSize);
-      //PVector center = new PVector (centerX, centerY);
     }
   }
 }
@@ -117,7 +136,7 @@ void newPlayer(int bsize) {
   play = new player (PCenter, bsize);
 }
 
-void newProjectile(int psize) {
+void newpProjectile(int psize) {
   float projX = play.Pcenter.x;
   //grid.length/2;
   float projY = play.Pcenter.y;
@@ -128,13 +147,30 @@ void newProjectile(int psize) {
   pProjectile = new player (projCenter, psize/2);
 }
 
+void enemyProj (alien[][] a) {
+  
+  int r = int (random(0, gridRows));
+  //grid.length/2;
+  int c = int(random(0, gridCols));
+  //grid[r].length;
+  int size = a[r][c].bsize;
+  PVector projCenter = new PVector (a[r][c].center.x, a[r][c].center.y);
+  //fill(255, 0, 0);
+  noStroke();
+  aProjectile = new alien (projCenter, size/2);
+  
+}//enemyProj
+
+
 
 void keyPressed() {
   //nullPointer :(((
   if (keyPressed == true ) {
     if (key == ' ') {
       fire = true;
-      //play.Pmove();
+    }
+    if (key == 's') {
+      startGame = true;
     }
     if (key == CODED) {
       if (keyCode == LEFT)
@@ -159,8 +195,8 @@ void impact (player p, alien[][] g) {
         fire = false;
         //this doesnt really completely remove the ball, so ig it still processes it getting hit?
         g[r][c].bsize = 0;
-        g[r][c].center.y = 0;
-        newProjectile(bSize);
+        //g[r][c].center.y = 0;
+        newpProjectile(bSize);
       }
     }
   }
