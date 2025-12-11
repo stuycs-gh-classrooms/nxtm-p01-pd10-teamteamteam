@@ -7,10 +7,12 @@ class player
   int yspeed;
   int bsize;
   color c;
+  int lives;
 
   //default constructor
   player(PVector p, int s)
   {
+    lives = 3;
     bsize = s;
     Pcenter = new PVector(p.x, p.y);
   }
@@ -59,5 +61,13 @@ class player
     Pcenter.x+= xspeed;
     Pcenter.y -= 13;
   }
+  void playerHit(){
+    
+ // if (dist(play.Pcenter.x, play.Pcenter.y, aProjectile.center.x, aProjectile.center.y) < bSize/2){
+       play.lives--;
+      
+    // }
+    
+}
 }
 //Ball

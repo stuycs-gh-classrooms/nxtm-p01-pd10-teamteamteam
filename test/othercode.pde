@@ -33,18 +33,20 @@ void setup () {
   newPlayer(bSize);
   newpProjectile(bSize);
   enemyProj(grid);
+  //play.playerHit();
+  death();
 }
 
 void draw() {
-
   background (#1b1b1b);
+
   impact(pProjectile, grid);
   drawGrid(grid);
   drawPlayer(test);
   play.Pdisplay();
   pProjectile.Pdisplay();
   //aProjectile.display();
-  println(frameCount);
+  println(play.lives);
   if (alienRite == true) {
     boolean poo = false;
     for (int r = 0; r <= grid.length - 1; r++) {
@@ -90,6 +92,11 @@ void draw() {
   if (startGame == true) {
     aProjectile.Amove();
     aProjectile.display();
+    if (frameCount % 120 == 0) {
+      //moves @ angles and appears where the grid isnt ????
+      //fixed? i cant tell if its at an angle or not curse ye processing
+      enemyProj(grid);
+    }
   }
 }
 
@@ -148,7 +155,7 @@ void newpProjectile(int psize) {
 }
 
 void enemyProj (alien[][] a) {
-  
+
   int r = int (random(0, gridRows));
   //grid.length/2;
   int c = int(random(0, gridCols));
@@ -158,13 +165,11 @@ void enemyProj (alien[][] a) {
   //fill(255, 0, 0);
   noStroke();
   aProjectile = new alien (projCenter, size/2);
-  
 }//enemyProj
 
 
 
 void keyPressed() {
-  //nullPointer :(((
   if (keyPressed == true ) {
     if (key == ' ') {
       fire = true;
@@ -195,9 +200,27 @@ void impact (player p, alien[][] g) {
         fire = false;
         //this doesnt really completely remove the ball, so ig it still processes it getting hit?
         g[r][c].bsize = 0;
-        //g[r][c].center.y = 0;
+        g[r][c].center.y = 0;
         newpProjectile(bSize);
       }
+      if (dist(play.Pcenter.x, play.Pcenter.y, aProjectile.center.x, aProjectile.center.y) < bSize/2){
+        enemyProj(grid);
+        //doesnt proccess hit
+        play.playerHit();
     }
+    }
+  }
+  //play.playerHit();
+}
+
+
+
+void death() {
+  if (play.lives == 0) {
+    play.bsize = 0;
+    startGame = false;
+    stroke(255);
+    textSize (15);
+    text ("GAME OVER", width/2, height/2);
   }
 }
