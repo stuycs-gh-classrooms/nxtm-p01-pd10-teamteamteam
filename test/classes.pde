@@ -62,13 +62,6 @@ class alien
       center.y < bsize/2) {
       yspeed*= -1;
     }
-    /*
-    if (alienRite == true) {
-      center.x+=1;
-    } else if (alienRite != true) {
-      center.x-=1;
-    }
-    */
-    center.y+= 8;
+    center.y+= 10;
   }
 }//Ball

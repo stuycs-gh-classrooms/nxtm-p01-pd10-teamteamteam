@@ -31,6 +31,7 @@ class player
   {
     fill(255);
     circle(Pcenter.x, Pcenter.y, bsize);
+    //maybe make this a triangle?
   }
   //display
 
@@ -59,7 +60,7 @@ class player
       yspeed*= -1;
     }
     Pcenter.x+= xspeed;
-    Pcenter.y -= 13;
+    Pcenter.y -= 14;
   }
   void playerHit(){
     
@@ -69,5 +70,29 @@ class player
     // }
     
 }
+
+void death() {
+  if (play.lives == 0) {
+    startGame = false;
+    
+   // stroke(255);
+    textSize (25);
+    //temporarily stays on screen :(
+    text ("GAME OVER", width/2, height/2);
+    //text wont show
+    delay(1000000000);
+    
+  
+  }
+}
+/*
+void gameOver (){
+  if (play.lives == 0) {
+   textSize (25);
+    //temporarily stays on screen :(
+    text ("GAME OVER", width/2, height/2);
+  }
+}
+*/
 }
 //Ball

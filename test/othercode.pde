@@ -33,13 +33,13 @@ void setup () {
   newPlayer(bSize);
   newpProjectile(bSize);
   enemyProj(grid);
-  //play.playerHit();
-  death();
+  //play.death();
 }
 
 void draw() {
   background (#1b1b1b);
-
+  // play.gameOver();
+  play.death();
   impact(pProjectile, grid);
   drawGrid(grid);
   drawPlayer(test);
@@ -92,7 +92,7 @@ void draw() {
   if (startGame == true) {
     aProjectile.Amove();
     aProjectile.display();
-    if (frameCount % 120 == 0) {
+    if (frameCount % 90 == 0) {
       //moves @ angles and appears where the grid isnt ????
       //fixed? i cant tell if its at an angle or not curse ye processing
       enemyProj(grid);
@@ -177,6 +177,13 @@ void keyPressed() {
     if (key == 's') {
       startGame = true;
     }
+    if (key == 'p') {
+      //pause
+    }
+    if (key == 'r'){
+      makeAliens(grid);
+      play.lives = 3;
+    }
     if (key == CODED) {
       if (keyCode == LEFT)
       {
@@ -203,24 +210,10 @@ void impact (player p, alien[][] g) {
         g[r][c].center.y = 0;
         newpProjectile(bSize);
       }
-      if (dist(play.Pcenter.x, play.Pcenter.y, aProjectile.center.x, aProjectile.center.y) < bSize/2){
+      if (dist(play.Pcenter.x, play.Pcenter.y, aProjectile.center.x, aProjectile.center.y) < bSize/2) {
         enemyProj(grid);
-        //doesnt proccess hit
         play.playerHit();
+      }
     }
-    }
-  }
-  //play.playerHit();
-}
-
-
-
-void death() {
-  if (play.lives == 0) {
-    play.bsize = 0;
-    startGame = false;
-    stroke(255);
-    textSize (15);
-    text ("GAME OVER", width/2, height/2);
   }
 }
