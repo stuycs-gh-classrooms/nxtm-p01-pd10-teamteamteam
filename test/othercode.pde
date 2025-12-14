@@ -18,6 +18,7 @@ int bSize = 50;
 int gridRows = 3;
 int gridCols = 5;
 int sec = second();
+int score = 0;
 
 void setup () {
   size (600, 600);
@@ -33,33 +34,32 @@ void setup () {
   newPlayer(bSize);
   newpProjectile(bSize);
   enemyProj(grid);
-  //play.death();
-}
+  
+}//setup
 
 void draw() {
   background (#1b1b1b);
-  // play.gameOver();
   play.death();
   impact(pProjectile, grid);
   drawGrid(grid);
   drawPlayer(test);
   play.Pdisplay();
   pProjectile.Pdisplay();
+  textSize(15);
+  text (score, width/10, height/10);
   //aProjectile.display();
   println(play.lives);
   if (alienRite == true) {
-    boolean poo = false;
     for (int r = 0; r <= grid.length - 1; r++) {
       for (int c = 0; c <= grid[r].length - 1; c++) {
-        if (poo ==  true) {
-          // grid[r-1][c].center.y += 2*bSize;
-        }
+
         //grid bounces back @ right edge
         if (width - grid[r][c].center.x <= bSize/2) {
+
           //doesnt move first row down?
           //grid[r][c].center.y += bSize;
           alienRite = false;
-          poo = true;
+          // poo = true;
         }
 
         grid[r][c].move();
@@ -67,18 +67,13 @@ void draw() {
     }
   }
   if (alienRite == false) {
-    boolean poo = false;
+
     for (int r = 0; r <= grid.length - 1; r++) {
       for (int c = 0; c <= grid[r].length - 1; c++) {
-        if (poo ==  true) {
-          // grid[r][c].center.y += 3*bSize;
-        }
-
         //grid bounces back @ left edge
         if (grid[r][c].center.x <= bSize/2) {
           //grid[r][c].center.y += bSize;
           alienRite = true;
-          poo = true;
         }
         grid[r][c].move();
       }
@@ -98,7 +93,7 @@ void draw() {
       enemyProj(grid);
     }
   }
-}
+}//draw
 
 void makeAliens(alien[][] g) {
 
@@ -110,7 +105,7 @@ void makeAliens(alien[][] g) {
       g[r][c] = new alien(center, bSize);
     }
   }
-}
+}//makeAliens
 
 
 
@@ -122,17 +117,29 @@ void drawGrid(alien[][] g) {
 
         (g[r][c]).display();
       }
-      //text("test", width/2, height/2);
+      
+      if (r == 0) {
+        g[r][c].aLives = 1;
+        g[r][c].col = #993366;
+      }
+      if (r == 1) {
+        g[r][c].aLives = 1;
+        g[r][c].col = #CC0000;
+      }
+      if (r == grid.length -1) {
+        g[r][c].aLives = 1;
+        g[r][c].col = #CC3300;
+      }
     }
   }
-}
+}//drawGrid
 
 void drawPlayer (player[] p) {
   if (p[0] != null) {
 
     (p[0]).Pdisplay();
   }
-}
+}//drawPlayer
 
 void newPlayer(int bsize) {
 
@@ -141,7 +148,7 @@ void newPlayer(int bsize) {
   PVector PCenter = new PVector (projX, projY);
   fill(255, 0, 0);
   play = new player (PCenter, bsize);
-}
+} //newPlayer
 
 void newpProjectile(int psize) {
   float projX = play.Pcenter.x;
@@ -152,7 +159,7 @@ void newpProjectile(int psize) {
   fill(255, 0, 0);
   noStroke();
   pProjectile = new player (projCenter, psize/2);
-}
+}//new Player Projectile
 
 void enemyProj (alien[][] a) {
 
@@ -165,6 +172,7 @@ void enemyProj (alien[][] a) {
   //fill(255, 0, 0);
   noStroke();
   aProjectile = new alien (projCenter, size/2);
+  aProjectile.col = a[r][c].col;
 }//enemyProj
 
 
@@ -180,7 +188,7 @@ void keyPressed() {
     if (key == 'p') {
       //pause
     }
-    if (key == 'r'){
+    if (key == 'r') {
       makeAliens(grid);
       play.lives = 3;
     }
@@ -196,7 +204,7 @@ void keyPressed() {
       }
     }
   }
-}
+}//keypressed
 
 void impact (player p, alien[][] g) {
   for (int r = 0; r <= grid.length - 1; r++) {
@@ -205,15 +213,34 @@ void impact (player p, alien[][] g) {
       if ((abs((grid[r][c].center.y - p.Pcenter.y)) < bSize/2) &&
         (abs((grid[r][c].center.x - p.Pcenter.x)) < bSize/2)) {
         fire = false;
-        //this doesnt really completely remove the ball, so ig it still processes it getting hit?
-        g[r][c].bsize = 0;
-        g[r][c].center.y = 0;
+        g[r][c].alienHit();
+        //g[r][c].bsize = 0;
+        //g[r][c].center.y = 0;
         newpProjectile(bSize);
+        if ( g[r][c].aLives == 0){
+        if (r == grid.length - 1 ) {
+          g[r][c].bsize = 0;
+          g[r][c].center.y = 0;
+          score += 10;
+        }
+        else if (r == 1)
+        {
+          g[r][c].bsize = 0;
+          g[r][c].center.y = 0;
+          score += 20;
+        }
+       else  if (r == 0 ) {
+          g[r][c].bsize = 0;
+          g[r][c].center.y = 0;
+          score += 30;
+        }
       }
+      
       if (dist(play.Pcenter.x, play.Pcenter.y, aProjectile.center.x, aProjectile.center.y) < bSize/2) {
         enemyProj(grid);
         play.playerHit();
       }
     }
   }
-}
+  }
+}//impact

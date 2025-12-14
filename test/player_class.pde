@@ -49,6 +49,7 @@ class player
     Pcenter.x+= xspeed;
     Pcenter.y+= yspeed;
   }//move
+  
   void Xmove()
   {
     if (Pcenter.x > width - bsize/2 ||
@@ -62,37 +63,25 @@ class player
     Pcenter.x+= xspeed;
     Pcenter.y -= 14;
   }
-  void playerHit(){
-    
- // if (dist(play.Pcenter.x, play.Pcenter.y, aProjectile.center.x, aProjectile.center.y) < bSize/2){
-       play.lives--;
-      
-    // }
-    
-}
-
-void death() {
-  if (play.lives == 0) {
-    startGame = false;
-    
-   // stroke(255);
-    textSize (25);
-    //temporarily stays on screen :(
-    text ("GAME OVER", width/2, height/2);
-    //text wont show
-    delay(1000000000);
-    
   
+  void playerHit() {
+
+    play.lives--;
+
+    // }
   }
-}
-/*
-void gameOver (){
-  if (play.lives == 0) {
-   textSize (25);
-    //temporarily stays on screen :(
-    text ("GAME OVER", width/2, height/2);
+
+  void death() {
+    if (play.lives == 0) {
+      startGame = false;
+
+      // stroke(255);
+      textSize (25);
+      //temporarily stays on screen :(
+      text ("GAME OVER", width/2, height/2);
+      //text wont show
+     // delay(1000000000);
+    }
   }
-}
-*/
 }
 //Ball

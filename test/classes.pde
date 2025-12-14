@@ -7,7 +7,8 @@ class alien
   int xspeed;
   int yspeed;
   int bsize;
-  color c;
+  color col;
+  int aLives;
 
   //default constructor
   alien(PVector p, int s)
@@ -28,7 +29,7 @@ class alien
   //visual behavior
   void display()
   {
-    fill(#DD571C);
+    fill(col);
     circle(center.x, center.y, bsize);
   }//display
 
@@ -64,4 +65,12 @@ class alien
     }
     center.y+= 10;
   }
+  
+  void alienHit() {
+
+    aLives--;
+
+    // }
+  }
+
 }//Ball
